@@ -77,3 +77,25 @@ const payrollCompany = new CompanyWithPayroll("TechCorp");
 payrollCompany.addEmployee(emp1);
 payrollCompany.addEmployee(mgr1);
 console.log(payrollCompany.calculateTotalPayroll());
+
+// TASK 5: IMPLEMENTING PROMOTIONS
+
+// Add a method in the company class
+class CompanyWithPromotions extends CompanyWithPayroll {
+    promoteToManager(employee, teamSize) {
+        const index = this.employees.indexOf(employee);
+        if (index !== -1) {
+            this.employees[index] = new Manager( // Convert an Employee into a Manager while retaining their original details
+                employee.name,
+                employee.id,
+                employee.department,
+                employee.salary,
+                teamSize
+            );
+        }
+    }
+}
+const promotionCompany = new CompanyWithPromotions("TechCorp");
+promotionCompany.addEmployee(emp1);
+promotionCompany.promoteToManager(emp1, 3);
+promotionCompany.listEmployees();
