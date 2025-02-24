@@ -59,3 +59,21 @@ const company = new Company("TechCorp");
 company.addEmployee(emp1);
 company.addEmployee(mgr1);
 company.listEmployees();
+
+// TASK 4: IMPLEMENTING A PAYROLL SYSTEM
+
+// Add a method that returns the sum of all employee salaries (including managers)
+class CompanyWithPayroll extends Company {
+    calculateTotalPayroll() {
+        return this.employees.reduce((total, emp) => {
+            return emp instanceof Manager
+                ? total + emp.calculateAnnualSalary() + emp.calculateBonus()
+                : total + emp.calculateAnnualSalary();
+        }, 0);
+    }
+
+}
+const payrollCompany = new CompanyWithPayroll("TechCorp");
+payrollCompany.addEmployee(emp1);
+payrollCompany.addEmployee(mgr1);
+console.log(payrollCompany.calculateTotalPayroll());
